@@ -1,6 +1,6 @@
 import 'package:chnganh/screens/login_screens/login_page.dart';
 import 'package:chnganh/screens/login_screens/sign_up_page.dart';
-import 'package:chnganh/screens/sign_up.dart';
+import 'package:chnganh/screens/sign_up_screen.dart';
 import 'package:chnganh/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -33,9 +33,6 @@ class OnBoardingPage extends StatelessWidget {
                   ButtonWidget(
                     text: 'Go to Sign in',
                     onClicked: () => Login(context),
-                  ),
-                  const SizedBox(
-                    height: 20,
                   ),
                   ButtonSignup(
                       text: 'No Account yet ? Sign up here.',
