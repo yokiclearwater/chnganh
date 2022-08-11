@@ -1,5 +1,5 @@
 import 'package:chnganh/constants/colors.dart';
-import 'package:chnganh/screens/login_screens/onboarding_page.dart';
+import 'package:chnganh/screens/onboarding_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,19 +7,20 @@ import 'package:flutter/material.dart';
 
 import '../widget/textfield_widget.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _fullNameController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     TextFieldWidget(
                       controller: _passwordController,
                       label: 'Password',
-                      validator: requiredValidator,
+                      validator: passwordValidator,
                       keyboardType: TextInputType.visiblePassword,
                       password: true,
                       prefixIcon: Icons.lock,
@@ -108,6 +109,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       password: true,
                       prefixIcon: Icons.lock,
                     ),
+                    const SizedBox(height: 20),
+                    TextFieldWidget(
+                      controller: _phoneNumberController,
+                      label: 'Phone Number',
+                      validator: phoneNumberValidator,
+                      keyboardType: TextInputType.phone,
+                      prefixIcon: Icons.lock,
+                    ),
                     const SizedBox(height: 30),
                     _buildButton(),
                   ],
@@ -119,14 +128,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-
-  // Future insertUser() async {
-  //   await FirebaseFirestore.instance.collection('users').add({
-  //     'fullName': _fullNameController.text,
-  //     'email': _emailController.text,
-  //     'password': _passwordController.text,
-  //   });
-  // }
 
   SizedBox _buildButton() {
     return SizedBox(
@@ -172,7 +173,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             .set({
           'fullName': _fullNameController.text,
           'email': _emailController.text,
-          'password': _passwordController.text,
+          'phoneNumber': _phoneNumberController.text,
         });
       });
     } on FirebaseAuthException catch (e) {
@@ -187,10 +188,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return null;
   }
 
+  String? passwordValidator(value) {
+    if (value!.isEmpty) {
+      return 'Please enter password';
+    }
+    if (value!.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+    return null;
+  }
+
   String? confirmPasswordValidator(String? confrimPasswordText) {
     if (confrimPasswordText == null || confrimPasswordText.isEmpty) {
       return 'This field is required';
     }
+
+    if (confrimPasswordText.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+
     if (confrimPasswordText != _passwordController.text) {
       return 'Passwords do not match';
     }

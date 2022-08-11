@@ -1,7 +1,6 @@
-import 'package:chnganh/screens/login_screen.dart';
-import 'package:chnganh/screens/login_screens/onboarding_page.dart';
-import 'package:chnganh/screens/login_screens/sign_up_page.dart';
-import 'package:chnganh/screens/sign_up_screen.dart';
+import 'package:chnganh/screens/login_page.dart';
+import 'package:chnganh/screens/onboarding_page.dart';
+import 'package:chnganh/screens/sign_up_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Chnganh',
-      home: SignUpScreen(),
+      home: OnBoardingPage(),
     );
   }
 }

@@ -1,6 +1,6 @@
-import 'package:chnganh/screens/login_screens/login_page.dart';
-import 'package:chnganh/screens/login_screens/sign_up_page.dart';
-import 'package:chnganh/screens/sign_up_screen.dart';
+import 'package:chnganh/screens/login_page.dart';
+
+import 'package:chnganh/screens/sign_up_page.dart';
 import 'package:chnganh/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -60,9 +60,9 @@ class OnBoardingPage extends StatelessWidget {
         // nextFlex: 0,
       ));
   void Login(context) => Navigator.of(context)
-      .pushReplacement(MaterialPageRoute(builder: (_) => LoginPage()));
+      .push(MaterialPageRoute(builder: (_) => LoginPage()));
   void Signup(context) => Navigator.of(context)
-      .pushReplacement(MaterialPageRoute(builder: (_) => SignUpScreen()));
+      .push(MaterialPageRoute(builder: (_) => const SignUpPage()));
 
   Widget builImage(String path) => Center(
         child: Image.asset(
