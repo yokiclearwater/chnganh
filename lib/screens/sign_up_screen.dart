@@ -135,8 +135,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
             await signUp();
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (builder) => OnBoardingPage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (builder) => OnBoardingPage()));
           }
         },
         child: Text(
